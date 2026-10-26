@@ -17,17 +17,14 @@ async def handle_join_request(update: ChatJoinRequest):
     chat_id = update.chat.id
     
     # Текст с вашими условиями
-    text = (
-        "Привет! 👋 Чтобы попасть в канал, ознакомься с условиями:\n\n"
-        "1. Быть вежливым.\n"
-        "2. Не спамить.\n"
-        "3. Не нарушать правила сообщества.\n\n"
-        "Нажимая кнопку ниже, ты подтверждаешь свое согласие."
+    text = (Привет! Ты подаешь заявку в закрытый канал Hentai Games.
+Наш контент предназначен строго для взрослой аудитории. Нажимая кнопку ниже, ты подтверждаешь, что тебе исполнилось 18 лет, и ты полностью соглашаешься с правилами и условиями сообщества.
+Нажми кнопку ниже, чтобы подтвердить возраст и войти
     )
     
     # Кнопка подтверждения (в callback_data передаем ID чата, чтобы одобрить именно этот канал)
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="✅ Я соглашаюсь", callback_data=f"accept_{chat_id}")]
+        [InlineKeyboardButton(text="Подтверждаю❗️ ✅️", callback_data=f"accept_{chat_id}")]
     ])
     
     try:
@@ -47,7 +44,7 @@ async def approve_user(callback: CallbackQuery):
         await bot.approve_chat_join_request(chat_id=chat_id, user_id=user_id)
         
         # Редактируем сообщение, убирая кнопку
-        await callback.message.edit_text("🎉 Вы успешно согласились с условиями и добавлены в канал!")
+        await callback.message.edit_text("Вы успешно согласились с условиями и добавлены в канал!")
     except Exception as e:
         await callback.message.edit_text("❌ Ссылка устарела или произошла ошибка. Попробуйте подать заявку снова.")
         print(f"Ошибка одобрения: {e}")
